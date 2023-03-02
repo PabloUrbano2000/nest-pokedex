@@ -1,5 +1,6 @@
 import { MongooseModule } from '@nestjs/mongoose';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { PokemonService } from './pokemon.service';
 import { PokemonController } from './pokemon.controller';
 import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
@@ -8,6 +9,7 @@ import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
   controllers: [PokemonController],
   providers: [PokemonService],
   imports: [
+    ConfigModule,
     MongooseModule.forFeature([
       {
         // NO ES EL NAME DEL ATRIBUTO SINO DEL DOCUMENT
@@ -16,5 +18,6 @@ import { Pokemon, PokemonSchema } from './entities/pokemon.entity';
       },
     ]),
   ],
+  exports: [MongooseModule],
 })
 export class PokemonModule {}
